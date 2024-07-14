@@ -8,6 +8,12 @@ option(DISABLE_PARCHECK "Disable parcheck")
 option(USE_OPENSSL "Use OpenSSL" ON)
 option(USE_GNUTLS "Use GnuTLS" OFF)
 
+include(CheckIncludeFile)
+CHECK_INCLUDE_FILE(alloca.h HAVE_ALLOCA_H)
+if(HAVE_ALLOCA_H)
+  add_definitions(-DHAVE_ALLOCA_H)
+endif()
+
 if(NOT DISABLE_TLS AND USE_GNUTLS)
 	set(USE_OPENSSL OFF)
 endif()
